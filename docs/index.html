@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | DevStack</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                        },
+                        docs: {
+                            bg: '#030712',
+                            sidebar: '#0b0f1a',
+                            border: '#1f2937',
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030712;
+            color: #94a3b8;
+        }
+
+        .glass-sidebar {
+            background: rgba(11, 15, 26, 0.8);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .docs-card {
+            background: rgba(17, 24, 39, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        pre {
+            background: #0f172a !important;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: #e2e8f0;
+        }
+
+        .token-keyword {
+            color: #c678dd;
+        }
+
+        .token-string {
+            color: #98c379;
+        }
+
+        .token-function {
+            color: #61afef;
+        }
+
+        .token-comment {
+            color: #5c6370;
+        }
+
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .active-link {
+            color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+            border-right: 2px solid #0ea5e9;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Mobile Header -->
+    <header
+        class="lg:hidden flex items-center justify-between p-4 border-b border-docs-border bg-docs-bg sticky top-0 z-50">
+        <a href="../" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-xs">
+                DS</div>
+            <span class="font-display font-bold text-white">DevStack</span>
+        </a>
+        <button id="menu-toggle" class="p-2 text-gray-400"><i class="fa-solid fa-bars-staggered"></i></button>
+    </header>
+
+    <div class="flex min-h-screen">
+        <!-- Documentation Sidebar -->
+        <aside id="sidebar"
+            class="fixed inset-y-0 left-0 z-40 w-72 lg:static lg:block transform -translate-x-full lg:translate-x-0 transition-transform duration-300 glass-sidebar flex flex-col pt-6 lg:pt-10 overflow-hidden">
+            <div class="px-6 mb-10 hidden lg:block">
+                <a href="../" class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold text-xl">
+                        DS</div>
+                    <span class="font-display font-bold text-xl text-white">DevStack</span>
+                </a>
+            </div>
+
+            <!-- Search Section -->
+            <div class="px-6 mb-8">
+                <div class="relative group">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                    <input type="text" placeholder="Quick search..."
+                        class="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all placeholder:text-gray-600">
+                </div>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto no-scrollbar px-2 space-y-8 pb-10">
+                <!-- Getting Started -->
+                <div>
+                    <h5 class="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-3">Getting Started
+                    </h5>
+                    <ul class="space-y-1">
+                        <li><a href="#introduction"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors active-link">Introduction</a>
+                        </li>
+                        <li><a href="#installation"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Installation</a>
+                        </li>
+                        <li><a href="#quickstart"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Quickstart
+                                Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Core Concepts -->
+                <div>
+                    <h5 class="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-3">Core Concepts
+                    </h5>
+                    <ul class="space-y-1">
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Infrastructure
+                                as Code</a></li>
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Edge
+                                Runtime</a></li>
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Security
+                                & Isolation</a></li>
+                    </ul>
+                </div>
+
+                <!-- CLI Reference -->
+                <div>
+                    <h5 class="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-3">CLI Reference
+                    </h5>
+                    <ul class="space-y-1">
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Authentication</a>
+                        </li>
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Deployment</a>
+                        </li>
+                        <li><a href="#"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Logs
+                                & Metrics</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 lg:max-w-4xl px-6 lg:px-16 pt-12 lg:pt-20 pb-20 overflow-y-auto no-scrollbar scroll-mt-24">
+
+            <div id="introduction" class="mb-16">
+                <nav class="flex items-center gap-2 text-xs text-brand-400 mb-6 font-medium">
+                    <span>Docs</span>
+                    <i class="fa-solid fa-chevron-right text-[8px] opacity-50"></i>
+                    <span class="text-gray-500">Introduction</span>
+                </nav>
+                <h1 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6">Introduction</h1>
+                <p class="text-lg leading-relaxed mb-8">
+                    Welcome to the DevStack documentation. DevStack is a cloud-native development platform designed to
+                    simplify the lifecycle of building and deploying high-performance applications to the global edge.
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-12">
+                    <div
+                        class="docs-card p-6 rounded-2xl group cursor-pointer hover:border-brand-500/30 transition-all">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 mb-4 transition-transform group-hover:scale-110">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-white font-bold mb-2">Cloud at Edge</h3>
+                        <p class="text-sm text-gray-500">Deploy your logic instantly across 150+ edge nodes.</p>
+                    </div>
+                    <div
+                        class="docs-card p-6 rounded-2xl group cursor-pointer hover:border-brand-500/30 transition-all">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 mb-4 transition-transform group-hover:scale-110">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-white font-bold mb-2">Zero Trust</h3>
+                        <p class="text-sm text-gray-500">Built-in security isolation at the hardware level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="installation" class="mb-16 pt-12">
+                <h2 class="text-3xl font-display font-bold text-white mb-6 border-b border-white/5 pb-4">Installation
+                </h2>
+                <p class="mb-6">DevStack CLI is the primary way to interact with the platform. You can install it using
+                    your favorite package manager.</p>
+
+                <div class="relative group">
+                    <pre><code><span class="token-comment"># Install using NPM</span>
+<span class="token-keyword">npm</span> install -g @devstack/cli
+
+<span class="token-comment"># Install using Brew</span>
+<span class="token-keyword">brew</span> install devstack</code></pre>
+                    <button class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"><i
+                            class="fa-regular fa-copy"></i></button>
+                </div>
+            </div>
+
+            <div id="quickstart" class="mb-16 pt-12">
+                <h2 class="text-3xl font-display font-bold text-white mb-6 border-b border-white/5 pb-4">Quickstart</h2>
+                <p class="mb-6">Once installed, you can initialize a new project and deploy it to the global edge with
+                    just a few commands.</p>
+
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-sm">
+                            1</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-2">Login to your account</h4>
+                            <pre><code><span class="token-keyword">devstack</span> login</code></pre>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-sm">
+                            2</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-2">Initialize project</h4>
+                            <pre><code><span class="token-keyword">devstack</span> init my-awesome-app</code></pre>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-sm">
+                            3</div>
+                        <div>
+                            <h4 class="text-white font-bold mb-2">Deploy at scale</h4>
+                            <pre><code><span class="token-keyword">devstack</span> deploy</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Navigation -->
+            <div class="mt-20 pt-10 border-t border-white/5 flex items-center justify-between">
+                <a href="#" class="group">
+                    <span class="text-xs text-gray-600 block mb-1">Previous</span>
+                    <span class="text-sm font-bold text-gray-400 group-hover:text-brand-400 transition-colors">Start
+                        Building</span>
+                </a>
+                <a href="#" class="group text-right">
+                    <span class="text-xs text-gray-600 block mb-1">Next</span>
+                    <span class="text-sm font-bold text-gray-400 group-hover:text-brand-400 transition-colors">CLI
+                        Reference</span>
+                </a>
+            </div>
+        </main>
+
+        <!-- Right Column Table of Contents -->
+        <aside class="hidden xl:block w-64 pr-10 pt-20">
+            <h5 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">On this page</h5>
+            <ul class="space-y-3 text-sm">
+                <li><a href="#introduction"
+                        class="text-gray-500 hover:text-brand-400 transition-colors border-l border-white/5 pl-4 block">Introduction</a>
+                </li>
+                <li><a href="#installation"
+                        class="text-gray-500 hover:text-brand-400 transition-colors border-l border-white/5 pl-4 block">Installation</a>
+                </li>
+                <li><a href="#quickstart"
+                        class="text-gray-500 hover:text-brand-400 transition-colors border-l border-white/5 pl-4 block">Quickstart</a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // Close sidebar when clicking links on mobile
+        const navLinks = sidebar.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
