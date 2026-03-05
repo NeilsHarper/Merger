@@ -75,7 +75,7 @@
         }
 
         .step-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color 0.4s, background-color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             perspective: 1000px;
         }
 
@@ -131,13 +131,13 @@
 
     <!-- Simple Nav -->
     <nav class="w-full py-6 px-8 flex justify-between items-center z-50">
-        <a href="index.html" class="flex items-center gap-3 group">
+        <a href="../" class="flex items-center gap-3 group">
             <div
                 class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 transition-all">
                 DS</div>
             <span class="font-display font-bold text-lg text-white">DevStack</span>
         </a>
-        <a href="index.html" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+        <a href="../" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
             <i class="fa-solid fa-xmark"></i>
             Exit Setup
         </a>
@@ -300,8 +300,8 @@
                 </div>
             </div>
 
-            <a href="index.html"
-                class="block w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-gray-200 transition-all gsap-success-btn">
+            <a href="../"
+                class="block w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-gray-200 transition-all gsap-success-btn text-center">
                 Go to Dashboard
             </a>
         </div>
@@ -333,7 +333,8 @@
                 duration: 0.8,
                 stagger: 0.1,
                 ease: "back.out(1.7)",
-                delay: 0.4
+                delay: 0.4,
+                clearProps: "transform,opacity"
             });
         }
 
