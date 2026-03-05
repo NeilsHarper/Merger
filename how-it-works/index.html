@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How it Works | DevStack</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Journey Line */
+        .journey-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom,
+                    transparent,
+                    rgba(14, 165, 233, 0.5) 15%,
+                    rgba(14, 165, 233, 0.5) 85%,
+                    transparent);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .journey-dot {
+            position: absolute;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: #0ea5e9;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.8);
+            z-index: 10;
+        }
+
+        /* Step Card Entry */
+        .step-entry {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .step-entry.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Background -->
+    <div class="fixed inset-0 z-[-1] bg-grid"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 border-b border-white/5 bg-black/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="../" class="flex items-center gap-3 group">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 transition-all">
+                        DS</div>
+                    <span class="font-display font-bold text-xl text-white">DevStack</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="/features/"
+                        class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Features</a>
+                    <a href="/how-it-works/" class="text-sm font-medium text-brand-400">How it Works</a>
+                    <a href="../#pricing"
+                        class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
+                    <a href="/get-started/"
+                        class="px-5 py-2 rounded-lg bg-white text-black text-sm font-bold hover:bg-gray-200 transition-all">Get
+                        Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 text-center">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-widest mb-8">
+                The Technical Journey
+            </div>
+            <h1 class="font-display text-5xl lg:text-7xl font-bold tracking-tight text-white mb-8">
+                Ship at the <br>
+                <span class="text-gradient">speed of thought.</span>
+            </h1>
+            <p class="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">
+                Discover how DevStack orchestrates your code from local development to global edge deployments in
+                milliseconds.
+            </p>
+        </div>
+    </header>
+
+    <!-- Technical Journey -->
+    <section class="relative py-20 px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-5xl mx-auto relative min-h-[1500px]">
+            <!-- Journey Background Line -->
+            <div class="journey-line"></div>
+
+            <!-- Step 1 -->
+            <div class="relative grid md:grid-cols-2 gap-12 mb-40 journey-step" data-step="1">
+                <div class="md:text-right flex flex-col justify-center order-2 md:order-1">
+                    <div class="inline-flex md:justify-end items-center gap-3 text-brand-400 mb-4">
+                        <span
+                            class="px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold tracking-widest uppercase">Phase
+                            01</span>
+                        <div class="w-8 h-px bg-brand-500/30 hidden md:block"></div>
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">Connect & Define</h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        Link your version control and define your infrastructure using our high-level DSL. No more
+                        clicking through cloud consoles. Your infrastructure is now versioned code.
+                    </p>
+                </div>
+                <!-- Logic Line Dot -->
+                <div class="journey-dot top-1/2"></div>
+                <!-- Visual Component -->
+                <div class="order-1 md:order-2 flex items-center">
+                    <div
+                        class="glass-panel w-full p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <i class="fa-brands fa-github text-2xl text-white"></i>
+                            <div class="h-2 w-24 bg-white/10 rounded"></div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="h-2 w-full bg-white/5 rounded"></div>
+                            <div class="h-2 w-3/4 bg-white/5 rounded"></div>
+                            <div class="h-2 w-1/2 bg-brand-500/40 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative grid md:grid-cols-2 gap-12 mb-40 journey-step" data-step="2">
+                <div class="order-1 md:order-1 flex items-center">
+                    <div
+                        class="glass-panel w-full p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="flex justify-center py-6">
+                            <div
+                                class="w-20 h-20 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-3xl animate-pulse">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-widest">WASM
+                                Pipeline</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Logic Line Dot -->
+                <div class="journey-dot top-1/2"></div>
+                <div class="flex flex-col justify-center order-2 md:order-2">
+                    <div class="inline-flex items-center gap-3 text-purple-400 mb-4">
+                        <div class="w-8 h-px bg-purple-500/30 hidden md:block"></div>
+                        <span
+                            class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] font-bold tracking-widest uppercase">Phase
+                            02</span>
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">Micro-Build & Compile</h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        DevStack intercepts your push, compiles your application into highly optimized WASM modules, and
+                        prepares the global distribution manifest. Cold starts are minimized to microseconds.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative grid md:grid-cols-2 gap-12 journey-step" data-step="3">
+                <div class="md:text-right flex flex-col justify-center order-2 md:order-1">
+                    <div class="inline-flex md:justify-end items-center gap-3 text-green-400 mb-4">
+                        <span
+                            class="px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-[10px] font-bold tracking-widest uppercase">Phase
+                            03</span>
+                        <div class="w-8 h-px bg-green-500/30 hidden md:block"></div>
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">Edge Routing & Scale</h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        Your app is propagated across 150+ edge nodes. Traffic is automatically routed to the nearest
+                        available node, ensuring sub-50ms latency for users anywhere in the world.
+                    </p>
+                </div>
+                <!-- Logic Line Dot -->
+                <div class="journey-dot top-1/2"></div>
+                <div class="order-1 md:order-2 flex items-center">
+                    <div
+                        class="glass-panel w-full p-8 rounded-3xl border border-white/10 relative overflow-hidden group h-64 flex flex-col justify-center">
+                        <div
+                            class="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="flex items-center justify-center gap-4 relative">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></div>
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping delay-300"></div>
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping delay-700"></div>
+                            <div
+                                class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400">
+                                <i class="fa-solid fa-satellite-dish"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-32 text-center relative overflow-hidden">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div class="max-w-2xl mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-8">Ready to start the journey?</h2>
+            <p class="text-gray-400 mb-12">Join 10,000+ engineers building on the modern edge.</p>
+            <a href="/get-started/"
+                class="px-12 py-5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-bold transition-all shadow-xl shadow-brand-500/30">
+                Get Started for Free
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-[#020617] py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">
+                    DS</div>
+                <span class="font-display font-bold text-white">DevStack</span>
+            </div>
+            <div class="flex gap-8 text-xs text-gray-400 uppercase tracking-widest font-semibold">
+                <a href="../" class="hover:text-white transition-colors">Home</a>
+                <a href="/features/" class="hover:text-white transition-colors">Features</a>
+                <a href="/get-started/" class="hover:text-white transition-colors">Get Started</a>
+            </div>
+            <p class="text-gray-600 text-[10px] uppercase tracking-[0.2em]">DevStack Global • © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Reveal
+        gsap.from("header > *", { y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out" });
+
+        // Journey Steps Animation
+        gsap.utils.toArray('.journey-step').forEach(step => {
+            gsap.from(step, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Animate dot scale
+            const dot = step.querySelector('.journey-dot');
+            gsap.from(dot, {
+                scrollTrigger: {
+                    trigger: dot,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                scale: 0,
+                duration: 0.8,
+                ease: "back.out(2)"
+            });
+        });
+
+        // Sticky Logic Line Progress
+        gsap.to(".journey-line", {
+            scrollTrigger: {
+                trigger: ".journey-line",
+                start: "top 20%",
+                end: "bottom 80%",
+                scrub: 1
+            },
+            height: "100%", // This is just a placeholder visual scrub
+            ease: "none"
+        });
+
+    </script>
+</body>
+
+</html>
